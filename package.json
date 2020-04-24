@@ -1,0 +1,23 @@
+{
+  "name": "react-native-material-chip",
+  "version": "0.0.1",
+  "description": "React native material chip",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicomontanari/react-native-material-chip.git"
+  },
+  "keywords": [
+    "react",
+    "native"
+  ],
+  "author": "Nico Montanari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicomontanari/react-native-material-chip/issues"
+  },
+  "homepage": "https://github.com/nicomontanari/react-native-material-chip#readme"
+}
