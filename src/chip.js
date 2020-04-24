@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {Image, StyleSheet, Text, View} from 'react-native'
 import {
     CHIP_HEIGHT,
     CHIP_LEFT_ICON_RADIUS,
@@ -8,8 +8,18 @@ import {
     CHIP_RADIUS, CHIP_TEXT_MARGIN,
     CHIP_TEXT_SIZE
 } from "./sizes";
+import PropTypes from 'prop-types';
+
+const propTypes = {
+    text: PropTypes.string,
+
+    checked: PropTypes.boolean,
+
+    leftIcon: PropTypes.elementType
+}
 
 const MaterialChip = props => {
+
 
     const _renderLeftIcon = (icon) => {
         if (!icon)
@@ -23,9 +33,11 @@ const MaterialChip = props => {
                     borderRadius: CHIP_LEFT_ICON_RADIUS
                 }}
             >
-                {icon}
                 {
-                    this.props.checked ? (
+                    icon
+                }
+                {
+                    props.checked ? (
                         <View
                             style={{
                                 position: 'absolute',
@@ -71,14 +83,18 @@ const MaterialChip = props => {
                                 _renderLeftIcon(leftIcon)
                             }
                             {
-                                checked ?
-                                    <MaterialIcon
-                                        style={{position: leftIcon ? 'absolute' : 'relative'}}
-                                        size={CHIP_LEFT_ICON_SIZE}
-                                        color={leftIcon ? '#fff' : '#000'}
-                                        name='check'
+                                checked ? (
+                                    <Image
+                                        style={{
+                                            position: leftIcon ? 'absolute' : 'relative',
+                                            height: CHIP_LEFT_ICON_SIZE,
+                                            width: CHIP_LEFT_ICON_SIZE,
+                                        }}
+                                        source={
+                                            `./assets/${require(leftIcon ? 'check_white.png' : 'check_black.png')}`
+                                        }
                                     />
-                                    : null
+                                ) : null
                             }
                         </View>
                     ) : null
@@ -112,6 +128,8 @@ const MaterialChip = props => {
         </View>
     )
 }
+
+MaterialChip.propTypes = propTypes;
 
 export default MaterialChip
 
