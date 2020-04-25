@@ -1,21 +1,16 @@
 import React from 'react'
-import {Image, StyleSheet, Text, View} from 'react-native'
-import {
-    CHIP_HEIGHT,
-    CHIP_LEFT_ICON_RADIUS,
-    CHIP_LEFT_ICON_SIZE,
-    CHIP_MARGIN,
-    CHIP_RADIUS, CHIP_TEXT_MARGIN,
-    CHIP_TEXT_SIZE
-} from "./sizes";
-import PropTypes from 'prop-types';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import * as sizes from "./sizes"
+import PropTypes from 'prop-types'
 
 const propTypes = {
     text: PropTypes.string,
 
     checked: PropTypes.boolean,
 
-    leftIcon: PropTypes.elementType
+    leftIcon: PropTypes.elementType,
+
+    onPress: PropTypes.function
 }
 
 const MaterialChip = props => {
@@ -28,9 +23,9 @@ const MaterialChip = props => {
         return (
             <View
                 style={{
-                    height: CHIP_LEFT_ICON_SIZE,
-                    width: CHIP_LEFT_ICON_SIZE,
-                    borderRadius: CHIP_LEFT_ICON_RADIUS
+                    height: sizes.CHIP_LEFT_ICON_SIZE,
+                    width: sizes.CHIP_LEFT_ICON_SIZE,
+                    borderRadius: sizes.CHIP_LEFT_ICON_RADIUS
                 }}
             >
                 {
@@ -45,9 +40,9 @@ const MaterialChip = props => {
                                 left: 0,
                                 backgroundColor: '#000',
                                 opacity: 0.2,
-                                height: CHIP_LEFT_ICON_SIZE,
-                                width: CHIP_LEFT_ICON_SIZE,
-                                borderRadius: CHIP_LEFT_ICON_RADIUS
+                                height: sizes.CHIP_LEFT_ICON_SIZE,
+                                width: sizes.CHIP_LEFT_ICON_SIZE,
+                                borderRadius: sizes.CHIP_LEFT_ICON_RADIUS
                             }}
                         />
                     ) : null
@@ -83,16 +78,23 @@ const MaterialChip = props => {
                                 _renderLeftIcon(leftIcon)
                             }
                             {
-                                checked ? (
+                                checked ? leftIcon ? (
                                     <Image
                                         style={{
-                                            position: leftIcon ? 'absolute' : 'relative',
-                                            height: CHIP_LEFT_ICON_SIZE,
-                                            width: CHIP_LEFT_ICON_SIZE,
+                                            position: 'absolute',
+                                            height: sizes.CHIP_LEFT_ICON_SIZE,
+                                            width: sizes.CHIP_LEFT_ICON_SIZE
                                         }}
-                                        source={
-                                            `./assets/${require(leftIcon ? 'check_white.png' : 'check_black.png')}`
-                                        }
+                                        source={require(`./assets/check_white.png`)}
+                                    />
+                                ) : (
+                                    <Image
+                                        style={{
+                                            position: 'relative',
+                                            height: sizes.CHIP_LEFT_ICON_SIZE,
+                                            width: sizes.CHIP_LEFT_ICON_SIZE
+                                        }}
+                                        source={require(`./assets/check_black.png`)}
                                     />
                                 ) : null
                             }
@@ -101,9 +103,9 @@ const MaterialChip = props => {
                 }
                 <Text
                     style={{
-                        fontSize: CHIP_TEXT_SIZE,
-                        marginRight: CHIP_TEXT_MARGIN,
-                        marginLeft: checked || leftIcon ? 0 : CHIP_TEXT_MARGIN,
+                        fontSize: sizes.CHIP_TEXT_SIZE,
+                        marginRight: sizes.CHIP_TEXT_MARGIN,
+                        marginLeft: checked || leftIcon ? 0 : sizes.CHIP_TEXT_MARGIN,
                         color: 'rgba(0, 0, 0, 0.87)'
                     }}
                 >
@@ -115,11 +117,26 @@ const MaterialChip = props => {
         )
     }
 
-    return (
+    return props.onPress ? (
+        <TouchableOpacity
+            onPress={() => props.onPress()}
+        >
+            <View
+                style={[chipStyle.mainContainer, {
+                    marginLeft: sizes.CHIP_MARGIN,
+                    marginRight: sizes.CHIP_MARGIN
+                }]}
+            >
+                {
+                    _renderContent()
+                }
+            </View>
+        </TouchableOpacity>
+    ) : (
         <View
             style={[chipStyle.mainContainer, {
-                marginLeft: CHIP_MARGIN,
-                marginRight: CHIP_MARGIN
+                marginLeft: sizes.CHIP_MARGIN,
+                marginRight: sizes.CHIP_MARGIN
             }]}
         >
             {
@@ -131,20 +148,22 @@ const MaterialChip = props => {
 
 MaterialChip.propTypes = propTypes;
 
+Object.assign(MaterialChip, sizes)
+
 export default MaterialChip
 
 export const chipStyle = StyleSheet.create({
     mainContainer: {
         borderWidth: 1,
-        minHeight: CHIP_HEIGHT,
-        borderRadius: CHIP_RADIUS,
+        minHeight: sizes.CHIP_HEIGHT,
+        borderRadius: sizes.CHIP_RADIUS,
         borderColor: '#C4C4C4',
-        margin: CHIP_MARGIN
+        margin: sizes.CHIP_MARGIN
     },
     colorCircle: {
-        height: CHIP_LEFT_ICON_SIZE,
-        width: CHIP_LEFT_ICON_SIZE,
-        borderRadius: CHIP_LEFT_ICON_RADIUS,
+        height: sizes.CHIP_LEFT_ICON_SIZE,
+        width: sizes.CHIP_LEFT_ICON_SIZE,
+        borderRadius: sizes.CHIP_LEFT_ICON_RADIUS,
         borderColor: '#C4C4C4'
     }
 })
