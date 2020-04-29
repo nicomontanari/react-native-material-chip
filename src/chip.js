@@ -1,9 +1,20 @@
 import React from 'react'
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {
+    Image,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    ViewPropTypes,
+    View
+} from 'react-native'
 import * as sizes from "./sizes"
 import PropTypes from 'prop-types'
 
+const viewPropTypes = ViewPropTypes || View.propTypes
+
 const propTypes = {
+    style: viewPropTypes,
+
     text: PropTypes.string,
 
     checked: PropTypes.boolean,
@@ -117,15 +128,21 @@ const MaterialChip = props => {
         )
     }
 
+    const styleProp = props.style !== undefined ? props.style : {}
+
     return props.onPress ? (
         <TouchableOpacity
             onPress={() => props.onPress()}
         >
             <View
-                style={[chipStyle.mainContainer, {
-                    marginLeft: sizes.CHIP_MARGIN,
-                    marginRight: sizes.CHIP_MARGIN
-                }]}
+                style={[
+                    styleProp,
+                    chipStyle.mainContainer,
+                    {
+                        marginLeft: sizes.CHIP_MARGIN,
+                        marginRight: sizes.CHIP_MARGIN
+                    }
+                ]}
             >
                 {
                     _renderContent()
@@ -134,10 +151,14 @@ const MaterialChip = props => {
         </TouchableOpacity>
     ) : (
         <View
-            style={[chipStyle.mainContainer, {
-                marginLeft: sizes.CHIP_MARGIN,
-                marginRight: sizes.CHIP_MARGIN
-            }]}
+            style={[
+                styleProp,
+                chipStyle.mainContainer,
+                {
+                    marginLeft: sizes.CHIP_MARGIN,
+                    marginRight: sizes.CHIP_MARGIN
+                }
+            ]}
         >
             {
                 _renderContent()
@@ -154,6 +175,7 @@ export default MaterialChip
 
 export const chipStyle = StyleSheet.create({
     mainContainer: {
+        alignSelf: 'flex-start',
         borderWidth: 1,
         minHeight: sizes.CHIP_HEIGHT,
         borderRadius: sizes.CHIP_RADIUS,

@@ -1,7 +1,12 @@
-import { Component } from 'react'
+import {
+    Component
+} from 'react'
+import {
+    ViewProperties
+} from 'react-native'
 import * as sizes from './src/sizes'
 
-interface MaterialChipProps {
+interface MaterialChipProps extends ViewProperties {
     text: string
     checked?: boolean
     leftIcon?: any
