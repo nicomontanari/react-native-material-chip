@@ -4,8 +4,10 @@ import * as sizes from './src/sizes'
 interface MaterialChipProps {
     text: string
     checked?: boolean
-    leftIcon?: any
     onPress?: () => void
+    leftIcon?: any
+    rightIcon?: any
+    onDelete?: () => void
 }
 
 export default class MaterialChip extends Component<MaterialChipProps> {
@@ -16,4 +18,6 @@ export default class MaterialChip extends Component<MaterialChipProps> {
     public static readonly CHIP_TEXT_MARGIN = sizes.CHIP_TEXT_MARGIN
     public static readonly CHIP_LEFT_ICON_SIZE = sizes.CHIP_LEFT_ICON_SIZE
     public static readonly CHIP_LEFT_ICON_RADIUS = sizes.CHIP_LEFT_ICON_RADIUS
+    public static readonly CHIP_RIGHT_ICON_SIZE = sizes.CHIP_RIGHT_ICON_SIZE
+    public static readonly CHIP_RIGHT_ICON_RADIUS = sizes.CHIP_RIGHT_ICON_RADIUS
 }

@@ -1,5 +1,12 @@
 import React from 'react'
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {
+    Image,
+    PixelRatio,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native'
 import * as sizes from "./sizes"
 import PropTypes from 'prop-types'
 
@@ -8,13 +15,54 @@ const propTypes = {
 
     checked: PropTypes.boolean,
 
+    onPress: PropTypes.function,
+
     leftIcon: PropTypes.elementType,
 
-    onPress: PropTypes.function
+    rightIcon: PropTypes.elementType,
+
+    onDelete: PropTypes.function
 }
 
 const MaterialChip = props => {
 
+    const _renderRightIcon = (icon) => {
+
+        if (!icon)
+            return (
+                <TouchableOpacity
+                    onPress={() => props.onDelete()}
+                >
+                    <View
+                        style={{
+                            height: sizes.CHIP_RIGHT_ICON_SIZE,
+                            width: sizes.CHIP_RIGHT_ICON_SIZE,
+                            borderRadius: sizes.CHIP_RIGHT_ICON_RADIUS
+                        }}
+                    >
+                        <Image
+                            style={{
+                                height: sizes.CHIP_RIGHT_ICON_SIZE,
+                                width: sizes.CHIP_RIGHT_ICON_SIZE
+                            }}
+                            source={require(`./assets/cancel_black.png`)}
+                        />
+                    </View>
+                </TouchableOpacity>
+            )
+
+        return <View
+            style={{
+                height: sizes.CHIP_RIGHT_ICON_SIZE,
+                width: sizes.CHIP_RIGHT_ICON_SIZE,
+                borderRadius: sizes.CHIP_RIGHT_ICON_RADIUS
+            }}
+        >
+            {
+                icon
+            }
+        </View>
+    }
 
     const _renderLeftIcon = (icon) => {
         if (!icon)
@@ -52,12 +100,6 @@ const MaterialChip = props => {
     }
 
     const _renderContent = () => {
-        const {
-            checked,
-            text,
-            leftIcon
-        } = props
-
         return (
             <View
                 style={{
@@ -67,18 +109,18 @@ const MaterialChip = props => {
                 }}
             >
                 {
-                    checked || leftIcon ? (
+                    props.checked || props.leftIcon ? (
                         <View
                             style={{
-                                marginLeft: 4,
-                                marginRight: 8
+                                marginLeft: PixelRatio.roundToNearestPixel(4),
+                                marginRight: PixelRatio.roundToNearestPixel(8)
                             }}
                         >
                             {
-                                _renderLeftIcon(leftIcon)
+                                _renderLeftIcon(props.leftIcon)
                             }
                             {
-                                checked ? leftIcon ? (
+                                props.checked ? props.leftIcon ? (
                                     <Image
                                         style={{
                                             position: 'absolute',
@@ -104,15 +146,29 @@ const MaterialChip = props => {
                 <Text
                     style={{
                         fontSize: sizes.CHIP_TEXT_SIZE,
-                        marginRight: sizes.CHIP_TEXT_MARGIN,
-                        marginLeft: checked || leftIcon ? 0 : sizes.CHIP_TEXT_MARGIN,
+                        marginRight: props.rightIcon || props.onDelete ? 0 : sizes.CHIP_TEXT_MARGIN,
+                        marginLeft: props.checked || props.leftIcon ? 0 : sizes.CHIP_TEXT_MARGIN,
                         color: 'rgba(0, 0, 0, 0.87)'
                     }}
                 >
                     {
-                        text
+                        props.text
                     }
                 </Text>
+                {
+                    props.rightIcon || props.onDelete ? (
+                        <View
+                            style={{
+                                marginLeft: PixelRatio.roundToNearestPixel(8),
+                                marginRight: PixelRatio.roundToNearestPixel(8)
+                            }}
+                        >
+                            {
+                                _renderRightIcon(props.rightIcon)
+                            }
+                        </View>
+                    ) : null
+                }
             </View>
         )
     }
