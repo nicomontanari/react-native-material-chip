@@ -46,6 +46,8 @@ export default BasicExample
 
 ### Props
 
+The component extents the [ViewProperties](https://reactnative.dev/docs/view-style-props)
+
 | Prop | Type | Default |
 | ---- | ---- | ------- |
 | `text` | `string` | `''` |
