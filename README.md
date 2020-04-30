@@ -1,5 +1,7 @@
 # React native material chip
 
+![Material chip](https://lh3.googleusercontent.com/nIlSfsCutvqK4ZGO91rq9ktUX90a6t7zQhf7KFH-3RXL7gMcUDrLVFafgDr82PgnbiBuwLn8t1vvVcL66wHp9p5VYocPI-7fYb9w=w1064-v0)
+
 React Native component for Anroid and iOS inspired by [Material Design Chip](https://material.io/components/chips)
 
 ## Installing
@@ -13,6 +15,8 @@ npm install react-native-material-chip
 ```
 
 ## Usage
+
+![Examples](Examples.png)
 
 ```jsx
 import React from 'react'
