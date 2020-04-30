@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-chip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React native material chip",
   "main": "index.js",
   "scripts": {
