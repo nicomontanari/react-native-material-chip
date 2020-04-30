@@ -8,68 +8,114 @@ import {
     ViewPropTypes,
     View
 } from 'react-native'
-import * as sizes from "./sizes"
+import * as sizes from './sizes'
 import PropTypes from 'prop-types'
 
 const viewPropTypes = ViewPropTypes || View.propTypes
 
 const propTypes = {
+    /*
+     * Prop to override the defaul style
+     */
     style: viewPropTypes,
 
+    /*
+     * Text prop
+     */
     text: PropTypes.string,
 
+    /*
+     * Control to render the check icon
+     */
     checked: PropTypes.boolean,
 
+    /*
+     * Function called when clicking on the chip
+     */
     onPress: PropTypes.function,
 
+    /*
+     * Left icon component
+     */
     leftIcon: PropTypes.elementType,
 
+    /*
+     * Right icon component
+     */
     rightIcon: PropTypes.elementType,
 
+    /*
+     * Function called when clicking on the right icon of the chip
+     */
     onDelete: PropTypes.function
 }
 
 const MaterialChip = props => {
 
+    // Render the right icon
     const _renderRightIcon = (icon) => {
-
+        // If there isn't a custom icon it renders the default icon
         if (!icon)
+            return (
+                <View
+                    style={{
+                        height: sizes.CHIP_RIGHT_ICON_SIZE,
+                        width: sizes.CHIP_RIGHT_ICON_SIZE,
+                        borderRadius: sizes.CHIP_RIGHT_ICON_RADIUS
+                    }}
+                >
+                    <Image
+                        style={{
+                            height: sizes.CHIP_RIGHT_ICON_SIZE,
+                            width: sizes.CHIP_RIGHT_ICON_SIZE
+                        }}
+                        source={require(`./assets/cancel_black.png`)}
+                    />
+                </View>
+            )
+
+        return (
+            <View
+                style={{
+                    height: sizes.CHIP_RIGHT_ICON_SIZE,
+                    width: sizes.CHIP_RIGHT_ICON_SIZE,
+                    borderRadius: sizes.CHIP_RIGHT_ICON_RADIUS
+                }}
+            >
+                {
+                    icon
+                }
+            </View>
+        )
+    }
+
+    // Render the right icon touchable
+    const _checkRightIconTouch = () => {
+
+        // If onDelete function is passed it renders the touchable component
+        if (props.onDelete) {
             return (
                 <TouchableOpacity
                     onPress={() => props.onDelete()}
                 >
-                    <View
-                        style={{
-                            height: sizes.CHIP_RIGHT_ICON_SIZE,
-                            width: sizes.CHIP_RIGHT_ICON_SIZE,
-                            borderRadius: sizes.CHIP_RIGHT_ICON_RADIUS
-                        }}
-                    >
-                        <Image
-                            style={{
-                                height: sizes.CHIP_RIGHT_ICON_SIZE,
-                                width: sizes.CHIP_RIGHT_ICON_SIZE
-                            }}
-                            source={require(`./assets/cancel_black.png`)}
-                        />
-                    </View>
+                    {
+                        _renderRightIcon(props.rightIcon)
+                    }
                 </TouchableOpacity>
             )
+        } else {
 
-        return <View
-            style={{
-                height: sizes.CHIP_RIGHT_ICON_SIZE,
-                width: sizes.CHIP_RIGHT_ICON_SIZE,
-                borderRadius: sizes.CHIP_RIGHT_ICON_RADIUS
-            }}
-        >
-            {
-                icon
+            // If the custom icon is passed it renders the icon without touchable component
+            if (props.rightIcon) {
+                return _renderRightIcon(props.rightIcon)
             }
-        </View>
+        }
     }
 
+    // Render the left icon
     const _renderLeftIcon = (icon) => {
+
+        // If the icon isn't passed it renders nothing
         if (!icon)
             return null
 
@@ -169,7 +215,7 @@ const MaterialChip = props => {
                             }}
                         >
                             {
-                                _renderRightIcon(props.rightIcon)
+                                _checkRightIconTouch()
                             }
                         </View>
                     ) : null
@@ -217,7 +263,7 @@ const MaterialChip = props => {
     )
 }
 
-MaterialChip.propTypes = propTypes;
+MaterialChip.propTypes = propTypes
 
 Object.assign(MaterialChip, sizes)
 

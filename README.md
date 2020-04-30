@@ -22,6 +22,9 @@ const BasicExample = () => {
     return (
         <MaterialChip
             text="Example"
+            checked={true}
+            onPress={() => console.log('press')}
+            onDelete={() => console.log('delete')}
             leftIcon={
                 <View
                     style={{
@@ -33,8 +36,17 @@ const BasicExample = () => {
                     }}
                 />
             }
-            checked={true}
-            onPress={() => console.log('press')}
+            rightIcon={
+                <View
+                    style={{
+                        height: MaterialChip.CHIP_RIGHT_ICON_SIZE,
+                        width: MaterialChip.CHIP_RIGHT_ICON_SIZE,
+                        borderRadius: MaterialChip.CHIP_RIGHT_ICON_RADIUS,
+                        backgroundColor: 'rgba(252,0,0,1)',
+                        borderWidth: 0
+                    }}
+                />
+            }
         />    
     )
 }
@@ -50,10 +62,12 @@ The component extents the [ViewProperties](https://reactnative.dev/docs/view-sty
 
 | Prop | Type | Default |
 | ---- | ---- | ------- |
-| `text` | `string` | `''` |
-| `leftIcon` | `element` | `null` |
+| `text` | `string` |  |
 | `checked` | `boolean` | `false` |
 | `onPress` | `function` | `null` |
+| `leftIcon` | `element` | `null` |
+| `rightIcon` | `element` | `null` |
+| `onDelete` | `function` | `null` |
 
 ### Constants
 

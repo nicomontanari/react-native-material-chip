@@ -1,3 +1,3 @@
-import chip from "./src/chip"
+import MaterialChip from "./src/MaterialChip"
 
-export default chip
+export default MaterialChip
