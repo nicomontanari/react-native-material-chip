@@ -50,7 +50,7 @@ const propTypes = {
     onDelete: PropTypes.function
 }
 
-const MaterialChip = props => {
+const MaterialChip = React.memo((props) => {
 
     // Render the right icon
     const _renderRightIcon = (icon) => {
@@ -261,7 +261,7 @@ const MaterialChip = props => {
             }
         </View>
     )
-}
+})
 
 MaterialChip.propTypes = propTypes
 
