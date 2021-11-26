@@ -2,17 +2,20 @@ import {
     Component
 } from 'react'
 import {
-    ViewProperties
+    ViewProps,
+    StyleProp,
+    TextStyle
 } from 'react-native'
 import * as sizes from './src/sizes'
 
-interface MaterialChipProps extends ViewProperties {
+interface MaterialChipProps extends ViewProps {
     text: string
     checked?: boolean
     onPress?: () => void
     leftIcon?: any
     rightIcon?: any
-    onDelete?: () => void
+    onDelete?: () => void,
+    textStyle?: StyleProp<TextStyle>;
 }
 
 export default class MaterialChip extends Component<MaterialChipProps> {
