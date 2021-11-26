@@ -29,6 +29,7 @@ const BasicExample = () => {
             checked={true}
             onPress={() => console.log('press')}
             onDelete={() => console.log('delete')}
+            textStyle={{color: 'rgba(0, 0, 0, 0.87)'}}
             leftIcon={
                 <View
                     style={{
@@ -72,6 +73,7 @@ The component extents the [ViewProperties](https://reactnative.dev/docs/view-sty
 | `leftIcon` | `element` | `null` |
 | `rightIcon` | `element` | `null` |
 | `onDelete` | `function` | `null` |
+| `textStyle` | `object` | `null` |
 
 ### Constants
 
