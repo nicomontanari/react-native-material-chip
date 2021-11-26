@@ -6,12 +6,14 @@ import {
     Text,
     TouchableOpacity,
     ViewPropTypes,
+    TextPropTypes,
     View
 } from 'react-native'
 import * as sizes from './sizes'
 import PropTypes from 'prop-types'
 
 const viewPropTypes = ViewPropTypes || View.propTypes
+const textPropTypes = TextPropTypes || Text.propTypes
 
 const propTypes = {
     /*
@@ -22,7 +24,7 @@ const propTypes = {
     /*
      * Prop to override the default text style
      */
-    textStyle: viewPropTypes,
+    textStyle: textPropTypes,
 
     /*
      * Text prop
