@@ -6,18 +6,25 @@ import {
     Text,
     TouchableOpacity,
     ViewPropTypes,
+    TextPropTypes,
     View
 } from 'react-native'
 import * as sizes from './sizes'
 import PropTypes from 'prop-types'
 
 const viewPropTypes = ViewPropTypes || View.propTypes
+const textPropTypes = TextPropTypes || Text.propTypes
 
 const propTypes = {
     /*
      * Prop to override the defaul style
      */
     style: viewPropTypes,
+
+    /*
+     * Prop to override the default text style
+     */
+    textStyle: textPropTypes,
 
     /*
      * Text prop
@@ -150,7 +157,9 @@ const MaterialChip = React.memo((props) => {
         )
     }
 
+    
     const _renderContent = () => {
+        const textStyleProp = props.textStyle !== undefined ? props.textStyle : {}
         return (
             <View
                 style={{
@@ -195,12 +204,12 @@ const MaterialChip = React.memo((props) => {
                     ) : null
                 }
                 <Text
-                    style={{
+                    style={[{
                         fontSize: sizes.CHIP_TEXT_SIZE,
                         marginRight: props.rightIcon || props.onDelete ? 0 : sizes.CHIP_TEXT_MARGIN,
                         marginLeft: props.checked || props.leftIcon ? 0 : sizes.CHIP_TEXT_MARGIN,
                         color: 'rgba(0, 0, 0, 0.87)'
-                    }}
+                    }, textStyleProp]}
                 >
                     {
                         props.text
