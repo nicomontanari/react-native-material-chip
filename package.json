@@ -2,7 +2,7 @@
   "name": "react-native-material-chip",
   "description": "React native material chip",
   "author": "Nico Montanari",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": {
     "type": "git",
