@@ -1,0 +1,15 @@
+name: Push library on npm
+on: [push]
+jobs:
+    try-to-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository code
+              uses: actions/checkout@v2
+            - name: Install dependecies
+              run: |
+                  yarn
+            - name: Build project
+              run: |
+                  yarn build
+            - run: echo "Build succesful"

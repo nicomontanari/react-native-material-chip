@@ -15,4 +15,9 @@ jobs:
             - name: Build project
               run: |
                   yarn build
+            - name: Deploy
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npx semantic-release
             - run: echo "Build succesful"
