@@ -1,5 +1,8 @@
 name: Push library on npm
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - master
 jobs:
     try-to-build:
         runs-on: ubuntu-latest
