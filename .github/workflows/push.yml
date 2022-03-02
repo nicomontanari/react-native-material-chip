@@ -1,8 +1,5 @@
 name: Try to build the library
-on:
-    push:
-        branches-ignore:
-            - master
+on: [push]
 jobs:
     try-to-build:
         runs-on: ubuntu-latest
