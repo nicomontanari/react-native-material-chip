@@ -1,8 +1,8 @@
 name: Push library on npm
 on:
-    pull_request:
-        types: [closed]
-        branches: [master]
+  push:
+    branches:
+      - master
 jobs:
     push-on-npm:
         runs-on: ubuntu-latest
